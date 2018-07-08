@@ -1,0 +1,5 @@
+这个小米的固件刷成功后是英文的，默认密码password，需要设置下保证路由器可以上外网（因为下面的命令会联网下载语言包），然后用putty登录ssh（默认用户名root，密码和登录密码一样），依次执行下面两条命令：
+ opkg update
+ opkg install plugin-gargoyle-i18n-SimplifiedChinese-ZH-CN
+ 
+看到successful回显就代表安装中文语言包成功，然后登录web页面，system 里面修改language为简体中文

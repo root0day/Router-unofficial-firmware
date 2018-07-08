@@ -1,0 +1,10 @@
+Tomato Phoenix MT62X 固件命名规则说明:
+
+Tomato-Phoenix-MT7620-MT7612E-WLLLL-PA-V101-@2016-05-18.trx
+Tomato-不死鸟-处理器型号-2/5G网卡型号-网口的顺序-功放-版本号-@编译日期
+2/5G网卡型号:2.4G: MT7602E,MT7603E 5G: MT7612E,MT7610E 无5G的设备可刷任意版本
+网卡顺序:WLLLL,LLLLW 其中W和L是WAN和LAN的缩写代表的是WAN和LAN的端口布局情况
+PA:带PA的设备可以刷不带PA和带PA的版本，不带PA的设备刷带PA的固件后无无线信号
+固件默认用户名:root 密码:tomato.org.cn
+
+固件最新版本: V101 更新日志 http://tomato.org.cn/changelog.html

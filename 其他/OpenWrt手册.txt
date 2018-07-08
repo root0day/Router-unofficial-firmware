@@ -1,0 +1,8 @@
+opkg update
+
+opkg install luci
+
+opkg install luci-i18n-base-zh-cn
+
+
+
