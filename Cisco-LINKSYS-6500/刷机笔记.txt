@@ -1,0 +1,55 @@
+
+1.先用ｔｆｔｐ大法启动临时固件um_factory_fw.bin,参见群内教程
+2.刷入老毛子固件或者hiboy的RT-N56UB1-RE6500-64M_3.4.3.9-099
+3.启动老毛子固件后，用winscp把pb-boot-linksys-re6500.bin上传到/tmp 目录
+4.ssh下执行 mtd_write -r -e Bootloader write /tmp/pb-boot-linksys-re6500.bin Bootloader
+5.按住电源旁边的按钮（注意不是底下的reset键）上电，等待5秒钟即可进入pb-boot，网页访问192.168.1.1即可进入web界面
+
+
+老毛子固件刷潘朵拉固件
+mtd_write write /tmp/固件全称 Firmware_Stub ，等完成后 reboot
+
+sysupgrade /tmp/re6500.bin
+
+
+
+
+输入 cd /tmp 命令进入 /tmp 目录。
+输入 mtd write <文件名> <mtd分区名> 命令以进行刷机操作
+
+
+关于获取 MTD 分区名：
+运行 cat /proc/mtd 命令即可查看
+
+
+
+华硕改版固件控制台说明
+控制台刷breed或者原厂uboot方法
+1.查看uboot分区名：cat /proc/mtd
+2.通过winscp或其他方式，将breed.bin文件上传至路由器/tmp/目录下，breed.bin必须小于等于128kb。
+3.mtd_write write /tmp/breed.bin Bootloader
+4.等2秒搞定，重启
+
+
+
+
+RE6500提取备份原厂uboot方法
+
+方法适用于未刷第三方uboot的RE6500机型。
+
+对于刚收到货的群友，也就是原厂固件的RE6500，刷L大潘多拉R4.4并提取备份原厂uboot的步骤如下，命令均不含引号：
+
+1. 网线连到路由器 2 口，把 PC IP 设置为 192.168.1.100， 然后开启 TFTP 服务器（可使用tftp32软件），把群共享里的 um_factory_fw.bin 文件放到 TFTP32 程序文件同一个目录下。
+2. 开启 RE6500 电源，将会从 TFTP 启动。等启动后 telnet 到 192.168.1.1 后，输入 “passwd” 修改root密码后，用 SSH 登录到路由器。
+3. 输入“cd /tmp”并回车，再输入“dd if=/dev/mtdblock0 of=/tmp/uboot.bin”并回车。
+4. 用 WinSCP 连接到路由器（文件协议要选scp），定位到/tmp目录，上传 L大潘多拉R4.4 固件到 /tmp（可以改个简单的文件名，比如r44.bin）, 并下载uboot.bin到本机桌面妥当备份。
+5. 在ssh中输入 “sysupgrade /tmp/r44.bin” 回车后等待几分钟，重启后完成刷机，重启后若无法进入管理页面，拔电源多重启几次尝试即可。
+
+对于已经刷了L大固件或者Hiboy老毛子固件的群友，备份上传原厂uboot的步骤如下：
+
+1. ssh进路由器
+2. “cd /tmp”，回车
+3. “dd if=/dev/mtdblock0 of=/tmp/uboot.bin”，回车
+4. winscp到路由器，定位到/tmp，把uboot.bin拖到电脑桌面
+5. 把桌面上的uboot.bin改名为uboot-orig.bin，上传群共享
+
